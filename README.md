@@ -5,19 +5,17 @@
 
 ### Setup
 
+```
 wget https://github.com/ywjt/elephant/releases/download/v0.2.4-beta/elephant_v0.2.4-beta.tar.gz
-
 tar -zxvf elephant_v0.2.4-beta.tar.gz -C /usr/local/
-
 chmod 775 -R /usr/local/elephant
-
 ln -s /usr/local/elephant/bin/elephantd /usr/local/bin/
-
 ln -s /usr/local/elephant/etc /etc/elephant.d
-
-elephantd help
+```
 
 ```
+elephantd help
+
 Usage: elephantd 
                           
  Options:  
