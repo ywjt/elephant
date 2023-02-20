@@ -3,9 +3,9 @@
 
 
 
-### Setup
+### 安装
 
-```
+```bash
 wget https://github.com/ywjt/elephant/releases/download/v0.2.4-beta/elephant_v0.2.4-beta.tar.gz
 tar -zxvf elephant_v0.2.4-beta.tar.gz -C /usr/local/
 chmod 775 -R /usr/local/elephant
@@ -13,7 +13,9 @@ ln -s /usr/local/elephant/bin/elephantd /usr/local/bin/
 ln -s /usr/local/elephant/etc /etc/elephant.d
 ```
 
-```
+### 帮助
+
+```console
 [root@test ~]# elephantd help
 
 Usage: elephantd 
@@ -40,7 +42,9 @@ Usage: elephantd
  
 ```
 
-```
+### 运行
+
+```console
 [root@test ~]# elephantd start --iface=eth0 --disk=sda --lport="11443" --istep=3 --delay=10
 Args Set: (eth0 sda ['start'] 10021 0 3 10) 
 Running: successd
@@ -48,3 +52,77 @@ Running: successd
 {'p_netpack': [{'18564_docker-proxy': {'recv': 0, 'send': 0}, '18556_docker-proxy': {'recv': 0, 'send': 0}}], 'ioutil': 0.0, 'cpu_idle': 99.1, 'mem_free': 22647062528, 'p_io': [{'18564_docker-proxy': {'read': 0, 'write': 0}, '18556_docker-proxy': {'read': 0, 'write': 0}}], 'jid': 0, 'p_memuse': [{'18564_docker-proxy': 10256384, '18556_docker-proxy': 10223616}], 'uptime': 1676878719, 'p_cpuuse': [{'18564_docker-proxy': 0.0, '18556_docker-proxy': 0.0}], 'p_netflow': [{'18564_docker-proxy': {'recv': 0, 'send': 0}, '18556_docker-proxy': {'recv': 0, 'send': 0}}], 'p_conns': [{'18564_docker-proxy': 0, '18556_docker-proxy': 0}], 'netpack': {'recv': 0, 'send': 0}, 'netflow': {'recv': 0, 'send': 0}, 'loadavg': '0.11'}
 
 ```
+
+### 配置文件
+
+```
+[root@test ~]# vi /etc/elephant.d/elephantd.conf 
+[system]
+# /var/log/elephant/elephant.log
+# 选项：DEBUG，INFO，WARNING，ERROR，CRITICAL 默认值：WARNING
+log_level = "INFO"
+log_file = "elephant.log" 
+
+#采集网口
+interface = "eth0"
+
+#采集分区
+diskpart = "vdb"
+
+#采用哪种传输方式
+#支持[mysql, api, custom]
+stream_type = 'custom'
+
+#远程发送到mysql
+[mysql]
+my_host = ""
+my_port = 3306
+my_user = "elephant"
+my_pwd = ""
+my_db = "elephant"
+
+#http接收接口
+[api]
+api_host = "https://domain.com"
+api_token = "test123456"
+
+
+#自定义发送接口
+#编写custom.py文件放入程序lib目录下
+#定义要执行的类名和方法名
+# cus_model = "ClassName.FuncName"
+[custom]
+cus_model = "CUSStream.api"
+
+```
+
+### 定制接口接收文件
+
+```
+[root@test ~]# vi /usr/local/elephant/lib/custom.py
+```
+```python
+#!/usr/bin/env python
+#-*- coding: utf-8 -*-
+import sys, os
+import json
+import requests
+
+class CUSStream(object):
+
+        def set(self, **kv):
+                print("my test gu, %s" % kv)
+
+        def api(self, **kv):
+                api_host = "https://domain.com"
+                api_token = "test12345678"
+                aheaders = {'Content-Type': 'application/json'}
+                if api_host.find("http") == -1:
+                        url = "http://%s?token=%s" % (api_host, api_token)
+                else:
+                        url = "%s?token=%s" % (api_host, api_token)
+                response = requests.post(url, headers=aheaders, data = json.dumps(kv))
+                return response.text
+
+```
+
