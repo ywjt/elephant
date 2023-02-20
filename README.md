@@ -126,3 +126,6 @@ class CUSStream(object):
 
 ```
 
+将收集到的数据存入MYSQL或时序数据里，你可以使用Grafana之类的图形软件进行图形展示。
+
+
