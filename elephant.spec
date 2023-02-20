@@ -3,7 +3,7 @@
 block_cipher = None
 
 
-a = Analysis(['bin/elephantd'],
+a = Analysis(['bin/elephantd.py'],
              pathex=['./','./lib'],
              binaries=[],
              datas=[],
