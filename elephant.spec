@@ -1,4 +1,7 @@
 # -*- mode: python ; coding: utf-8 -*-
+#
+# 这是一个使用 pyinstall 打包成二进制可执行程序的配置文件
+# 
 
 block_cipher = None
 
