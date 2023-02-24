@@ -46,7 +46,7 @@ Usage: elephantd
 
 ```console
 [root@test ~]# elephantd start --iface=eth0 --disk=sda --lport="11443" --istep=3 --delay=10
-Args Set: (eth0 sda ['start'] 10021 0 3 10) 
+Args Set: (eth0 sda ['start'] 11443 0 3 10) 
 Running: successd
 {'p_netpack': [{'18564_docker-proxy': {'recv': 7, 'send': 8}, '18556_docker-proxy': {'recv': 1, 'send': 2}}], 'ioutil': 0.0, 'cpu_idle': 99.3, 'mem_free': 22643351552, 'p_io': [{'18564_docker-proxy': {'read': 0, 'write': 0}, '18556_docker-proxy': {'read': 0, 'write': 0}}], 'jid': 0, 'p_memuse': [{'18564_docker-proxy': 10256384, '18556_docker-proxy': 10223616}], 'uptime': 1676878713, 'p_cpuuse': [{'18564_docker-proxy': 0.0, '18556_docker-proxy': 0.0}], 'p_netflow': [{'18564_docker-proxy': {'recv': 454, 'send': 474}, '18556_docker-proxy': {'recv': 71, 'send': 143}}], 'p_conns': [{'18564_docker-proxy': 0, '18556_docker-proxy': 0}], 'netpack': {'recv': 1, 'send': 3}, 'netflow': {'recv': 71, 'send': 416}, 'loadavg': '0.04'}
 {'p_netpack': [{'18564_docker-proxy': {'recv': 0, 'send': 0}, '18556_docker-proxy': {'recv': 0, 'send': 0}}], 'ioutil': 0.0, 'cpu_idle': 99.1, 'mem_free': 22647062528, 'p_io': [{'18564_docker-proxy': {'read': 0, 'write': 0}, '18556_docker-proxy': {'read': 0, 'write': 0}}], 'jid': 0, 'p_memuse': [{'18564_docker-proxy': 10256384, '18556_docker-proxy': 10223616}], 'uptime': 1676878719, 'p_cpuuse': [{'18564_docker-proxy': 0.0, '18556_docker-proxy': 0.0}], 'p_netflow': [{'18564_docker-proxy': {'recv': 0, 'send': 0}, '18556_docker-proxy': {'recv': 0, 'send': 0}}], 'p_conns': [{'18564_docker-proxy': 0, '18556_docker-proxy': 0}], 'netpack': {'recv': 0, 'send': 0}, 'netflow': {'recv': 0, 'send': 0}, 'loadavg': '0.11'}
